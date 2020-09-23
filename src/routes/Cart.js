@@ -78,7 +78,7 @@ function Cart(props) {
                   <IconButton
                     color="primary"
                     className={classes.marginLeft}
-                    onClick={() => updateCart(product, 'inc')}
+                    onClick={() => updateCartItem(product, 'inc')}
                   >
                     <AddIcon />
                   </IconButton>
