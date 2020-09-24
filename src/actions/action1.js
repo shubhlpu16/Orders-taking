@@ -8,8 +8,8 @@ const addStore = (data) => (dispatch) => {
   });
 };
 
-export const fetchCatalogue = () => (dispatch) => {
-  axios
+export const fetchCatalogue = () => async (dispatch) => {
+  await axios
     .get('https://shubh-orders-app.herokuapp.com/catalogue')
     .then((response) => {
       dispatch(
@@ -61,7 +61,7 @@ export const addUser = (params) => (dispatch) => {
   dispatch(addStore({ user: { ...params } }));
 };
 
-export const placeOrder = async (params) => {
+export const placeOrder = (params) => async (dispatch) => {
   const { store } = params;
   const { user, cart } = store.getState().ordersStore;
   let totalAmount = 0;
@@ -86,6 +86,8 @@ export const placeOrder = async (params) => {
     .catch((e) => {
       console.error(e);
     });
+
+  dispatch(addStore({ cart: [] }));
   return orderID;
 };
 

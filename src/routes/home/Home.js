@@ -26,13 +26,16 @@ function Home(props) {
   const classes = useStyles();
 
   const { store } = useContext(Context);
+  const [products, setProducts] = useState(props.orders);
+  const [open, setOpen] = useState(false);
 
   useEffect(async () => {
     await props.fetchCatalogue();
   }, []);
 
-  const [products, setProducts] = useState(props.orders);
-  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setProducts(props.orders);
+  });
 
   const onSearch = (event) => {
     const keyword = event.target.value;
@@ -51,8 +54,10 @@ function Home(props) {
         horizontal: 'left',
       }}
       open={open}
-      autoHideDuration={6000}
-      onClose={() => {}}
+      autoHideDuration={2000}
+      onClose={() => {
+        setOpen(false);
+      }}
       message="Product Added to cart"
       action={
         <>
@@ -75,7 +80,6 @@ function Home(props) {
     setOpen(true);
     props.addCart({ store, order });
   };
-
   return (
     <Layout
       title="Oder.ly"

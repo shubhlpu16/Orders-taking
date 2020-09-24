@@ -10,14 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
-const addresses = [
-  '1 Material-UI Drive',
-  'Reactville',
-  'Anytown',
-  '99999',
-  'USA',
-];
-
 const useStyles = makeStyles((theme) => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -77,8 +69,10 @@ export default function Review(props) {
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>
+            {props.user.firstName} {props.user.lastName}
+          </Typography>
+          <Typography gutterBottom>{props.user.city}</Typography>
         </Grid>
       </Grid>
     </>
@@ -87,4 +81,5 @@ export default function Review(props) {
 
 Review.propTypes = {
   cart: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired,
 };

@@ -64,7 +64,7 @@ function Checkout(props) {
   const { store } = useContext(Context);
 
   const handlePlaceOrder = async () => {
-    const orderID = await placeOrder({ store });
+    const orderID = await props.placeOrder({ store });
     setOrderID(orderID);
   };
   const handleNext = () => {
@@ -99,7 +99,9 @@ function Checkout(props) {
           />
         );
       case 1:
-        return <Review cart={props.cart} />;
+        return (
+          <Review cart={props.cart} user={{ firstName, lastName, city }} />
+        );
       default:
         throw new Error('Unknown step');
     }
@@ -159,10 +161,11 @@ function Checkout(props) {
 Checkout.propTypes = {
   cart: PropTypes.object.isRequired,
   addUser: PropTypes.func.isRequired,
+  placeOrder: PropTypes.func.isRequired,
 };
 export default connect(
   (store) => ({
     cart: store.ordersStore.cart,
   }),
-  { addUser },
+  { addUser, placeOrder },
 )(Checkout);
