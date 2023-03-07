@@ -10,7 +10,7 @@ const addStore = (data) => (dispatch) => {
 
 export const fetchCatalogue = () => async (dispatch) => {
   await axios
-    .get('https://shubh-orders-app.herokuapp.com/catalogue')
+    .get('https://order-data-production.up.railway.app/catalogue')
     .then((response) => {
       dispatch(
         addStore({
@@ -27,8 +27,8 @@ export const addCart = (params) => (dispatch) => {
   const { store, order } = params;
   const { cart } = store.getState().ordersStore;
   const cartItems = [...cart];
-  const itemId = cartItems.find((e) => e._id === order._id)  //eslint-disable-line
-  const items= cartItems.filter((e) => e._id !== order._id); //eslint-disable-line
+  const itemId = cartItems.find((e) => e._id === order._id); //eslint-disable-line
+  const items = cartItems.filter((e) => e._id !== order._id); //eslint-disable-line
   const newOrder = { ...itemId, ...order };
   if (itemId) {
     newOrder.quantity += 1;
@@ -79,7 +79,9 @@ export const placeOrder = (params) => async (dispatch) => {
   };
   let orderID = '';
   await axios
-    .post('https://shubh-orders-app.herokuapp.com/orders', { ...formData })
+    .post('https://order-data-production.up.railway.app/orders', {
+      ...formData,
+    })
     .then((response) => {
       orderID = response.data._id; //eslint-disable-line
     })
