@@ -10,7 +10,9 @@ const addStore = (data) => (dispatch) => {
 
 export const fetchCatalogue = () => async (dispatch) => {
   await axios
-    .get('https://order-data-production.up.railway.app/catalogue')
+    .get(
+      'https://order-data-api.netlify.app/.netlify/functions/index//catalogue',
+    )
     .then((response) => {
       dispatch(
         addStore({
@@ -79,9 +81,12 @@ export const placeOrder = (params) => async (dispatch) => {
   };
   let orderID = '';
   await axios
-    .post('https://order-data-production.up.railway.app/orders', {
-      ...formData,
-    })
+    .post(
+      'https://order-data-api.netlify.app/.netlify/functions/index//orders',
+      {
+        ...formData,
+      },
+    )
     .then((response) => {
       orderID = response.data._id; //eslint-disable-line
     })
