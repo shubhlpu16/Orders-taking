@@ -1,4 +1,4 @@
-[https://shubh-orders-taking.herokuapp.com/](https://shubh-orders-taking.herokuapp.com/)
+https://shubh-orders-taking.herokuapp.com/
 [Demo live](https://shubh-orders-taking.herokuapp.com/)
 This is a very basic react starter kit if you are a beginner and wants to develop your stand alone project
 
